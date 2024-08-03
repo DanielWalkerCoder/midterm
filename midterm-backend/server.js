@@ -10,7 +10,7 @@ const treasureRouter = require('./routes/treasures/treasureRouter')
 const weaponRouter = require('./routes/weapons/weaponRouter')
 
 mongoose
-    .connect("mongodb://127.0.0.1:27017/Chef-Hero")
+    .connect("mongodb://127.0.0.1:27017/Chef-Hero")//This creates a database named Chef-Hero that we can see in Studio 3T. 127:0.0.1 is the same as localhost, but sometimes programs won't use the latter.
     .then(()=>{
         console.log('MONGO DB CONNECTED')
     }).catch((e)=>{

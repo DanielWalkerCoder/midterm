@@ -6,16 +6,10 @@ Optional: delete main.css and its import in main.jsx
 
 Create a components folder inside src. Each component should have a folder for the component(.jsx) itself and the component's css.
 
-
-
-
-If using global variables, install redux and react-redux. Then make a store.js file.
-
-
-
-
+If using global variables, run npm install @reduxjs/toolkit react-redux. Make a store.js file and a slice file for each global variable. Wrap the top level of render in index.js in <Provider store={store}></Provider>.
 
 Get rid of the code in app.jsx and use the snippet rfce through the ES7+ extension to set up a boiler plate. Use import './App.css' if you wish, but clear what you don't want from the app.css file. To make it so that clicking on text doesn't highlight it, use this css:
+
 #root {
   user-select: none;
 }
