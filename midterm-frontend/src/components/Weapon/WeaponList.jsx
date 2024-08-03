@@ -58,7 +58,7 @@ const WeaponList = () => {
                         weapons.map(weapon =>{
                             return(
                                 <li key={weapon._id}>
-                                    {weapon.name} <a href="#" onClick={()=>deleteWeapon(weapon._id)}>delete</a> <a href="#" onClick={()=>deleteAndMoveWeapon(weapon._id)}>acquire</a>
+                                    {weapon.name} <a href="#" onClick={()=>deleteWeapon(weapon._id)}>delete</a> <a href="#" onClick={()=>deleteAndMoveWeapon(weapon._id)}>seek again</a>
                                 </li>
                             )
                         })
