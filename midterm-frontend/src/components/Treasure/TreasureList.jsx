@@ -26,7 +26,7 @@ const TreasureList = () => {
             console.log(error)
         }
       }
-      const deleteAndMoveTreasure = async (id)=>{
+    const deleteAndMoveTreasure = async (id)=>{
         try {
             const findTreasure = await axios.get(`http://localhost:3000/api/treasures/get-treasure-by-id/${id}`)
             const foundTreasure = findTreasure.data.payload

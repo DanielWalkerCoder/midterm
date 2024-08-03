@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { setWeapons } from '../../global/slices/weaponsSlice';
+import { setTreasures } from '../../global/slices/treasuresSlice';
 
 const WeaponList = () => {
     const dispatch = useDispatch();
@@ -21,6 +22,18 @@ const WeaponList = () => {
         try {
             const updatedWeapons = await axios.delete(`http://localhost:3000/api/weapons/delete-weapon-by-id/${id}`)
             dispatch(setWeapons(updatedWeapons.data.payload2))
+        } catch (error) {
+            console.log(error)
+        }
+      }
+    const deleteAndMoveWeapon = async (id)=>{
+        try {
+            const findWeapon = await axios.get(`http://localhost:3000/api/weapons/get-weapon-by-id/${id}`)
+            const foundWeapon = findWeapon.data.payload
+            const updatedWeapons = await axios.delete(`http://localhost:3000/api/weapons/delete-weapon-by-id/${id}`)
+            const updatedTreasures = await axios.post(`http://localhost:3000/api/treasures/create-treasure`, {name: foundWeapon.name})
+            dispatch(setWeapons(updatedWeapons.data.payload2))
+            dispatch(setTreasures(updatedTreasures.data.payload2))
         } catch (error) {
             console.log(error)
         }
@@ -45,7 +58,7 @@ const WeaponList = () => {
                         weapons.map(weapon =>{
                             return(
                                 <li key={weapon._id}>
-                                    {weapon.name} <a href="#" onClick={()=>deleteWeapon(weapon._id)}>delete</a>
+                                    {weapon.name} <a href="#" onClick={()=>deleteWeapon(weapon._id)}>delete</a> <a href="#" onClick={()=>deleteAndMoveWeapon(weapon._id)}>acquire</a>
                                 </li>
                             )
                         })
