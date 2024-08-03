@@ -21,7 +21,7 @@ const recipeSchema = new mongoose.Schema({
         type: Array
     },
     directions: {
-        type: String
+        type: Array
     },
     notes: {
         type: String
