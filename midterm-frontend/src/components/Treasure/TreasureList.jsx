@@ -41,7 +41,6 @@ const TreasureList = () => {
 
     return (
         <>
-            <h2>Treasures</h2>
             <div className="form-div">
                 <form onSubmit={handleOnSubmit}>
                 <input
@@ -50,7 +49,7 @@ const TreasureList = () => {
                     onChange={e => setTreasuresInput(e.target.value)}
                     value = {treasuresInput}
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Add Treasure</button>
                 </form>
             </div>
             <div className="treasureList-div">

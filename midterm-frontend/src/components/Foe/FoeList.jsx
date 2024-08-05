@@ -38,7 +38,6 @@ function FoeList() {
 
   return (
     <div>
-        <h2>Hated Foes</h2>
       <div className="form-div">
         <form onSubmit={handleOnSubmit}>
           <input
@@ -47,7 +46,7 @@ function FoeList() {
             onChange={e => setFoeInput(e.target.value)}
             value = {foeInput}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Add Foe</button>
         </form>
       </div>
       <div className="foeList-div">

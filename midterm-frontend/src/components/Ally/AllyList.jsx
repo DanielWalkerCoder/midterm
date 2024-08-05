@@ -39,7 +39,6 @@ function AllyList() {
 
   return (
     <div>
-        <h2>Trusted Allies</h2>
       <div className="form-div">
         <form onSubmit={handleOnSubmit}>
           <input
@@ -49,7 +48,7 @@ function AllyList() {
             value = {allyInput}
             // autoFocus
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Add Ally</button>
         </form>
       </div>
       <div className="allyList-div">

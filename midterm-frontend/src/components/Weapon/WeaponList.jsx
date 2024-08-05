@@ -7,6 +7,11 @@ import { setTreasures } from '../../global/slices/treasuresSlice';
 const WeaponList = () => {
     const dispatch = useDispatch();
     const weapons = useSelector((state) => state.weapons.value);
+    let sortedWeapons = []
+    for(let each of weapons){
+        sortedWeapons.push(each.name)
+    }
+    sortedWeapons.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
     const [weaponsInput, setWeaponsInput] = useState('');
     const handleOnSubmit = async (e)=>{
         // e.preventDefault()
@@ -40,7 +45,6 @@ const WeaponList = () => {
       }
     return (
         <>
-            <h2>Weapons</h2>
             <div className="form-div">
                 <form onSubmit={handleOnSubmit}>
                 <input
@@ -49,16 +53,16 @@ const WeaponList = () => {
                     onChange={e => setWeaponsInput(e.target.value)}
                     value = {weaponsInput}
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Add Weapon</button>
                 </form>
             </div>
             <div className="weaponList-div">
                 <ul>
                     {
-                        weapons.map(weapon =>{
+                        sortedWeapons.map((weapon, index) =>{
                             return(
-                                <li key={weapon._id}>
-                                    {weapon.name} <a href="#" onClick={()=>deleteWeapon(weapon._id)}>delete</a> <a href="#" onClick={()=>deleteAndMoveWeapon(weapon._id)}>seek again</a>
+                                <li key={index}>
+                                    {weapon} <a href="#" onClick={()=>deleteWeapon((weapons.find(thing => thing.name === weapon))._id)}>delete</a> <a href="#" onClick={()=>deleteAndMoveWeapon((weapons.find(thing => thing.name === weapon))._id)}>seek again</a>
                                 </li>
                             )
                         })

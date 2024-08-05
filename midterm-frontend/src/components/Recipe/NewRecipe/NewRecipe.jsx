@@ -75,7 +75,6 @@ const NewRecipe = () => {
     
     return (
         <>
-            <h2>New Recipe</h2>
             <div className="recipe-div">
                 <form onSubmit={handleOnSubmit}>
                     <div>
@@ -165,7 +164,7 @@ const NewRecipe = () => {
                         />
                     </div>
                     <br></br>
-                    <button type="submit">Submit</button> <button type="button" onClick={clearForm}>Cancel</button>
+                    <button type="submit">Add New Recipe</button> <button type="button" onClick={clearForm}>Cancel</button>
                 </form>
             </div>
         </>
