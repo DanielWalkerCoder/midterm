@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { setRecipes } from '../../../global/slices/recipesSlice'
@@ -7,51 +7,59 @@ const Rematch = () =>{
     const dispatch = useDispatch()
     const recipes = useSelector((state) => state.recipes.value);
     
-    //making uniqueTagsArr
-    let tagsArr = []
-    for(let i=0; i<recipes.length; i++){
-        tagsArr = tagsArr.concat(recipes[i].tags)
-    }
-    let uniqueTagsArr = []
-    for(let each of tagsArr){
-        if(uniqueTagsArr.indexOf(each) === -1){
-            uniqueTagsArr.push(each)
-        }
-    }
-    uniqueTagsArr.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
-    //
-
-    //making recipeNamesArr
-    let recipeNamesArr = []
-    for(let i=0; i<recipes.length; i++){
-        recipeNamesArr.push(recipes[i].name)
-    }
-    recipeNamesArr.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
-    //
-
+    const [uniqueTagsArr, setUniqueTagsArr] = useState([]);
+    const [recipeNamesArr, setRecipeNamesArr] = useState([]);
     const [selectedTag, setSelectedTag] = useState('Any tag');
     const [recipesWithTag, setRecipesWithTag] = useState(recipeNamesArr);
     const [selectedRecipe, setSelectedRecipe] = useState('I said CHOOSE!');
     const [selectedRecipeObj, setSelectedRecipeObj] = useState({});
+    
+    useEffect(() => {
+        //making uniqueTagsArr
+        let tagsArr = []
+        for(let i=0; i<recipes.length; i++){
+            tagsArr = tagsArr.concat(recipes[i].tags)
+        }
+        let uTA = []
+        for(let each of tagsArr){
+            if(uTA.indexOf(each) === -1){
+                uTA.push(each)
+            }
+        }
+        uTA.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
+        setUniqueTagsArr(uTA)
+        //making recipeNamesArr
+        let rNA = []
+        for(let i=0; i<recipes.length; i++){
+            rNA.push(recipes[i].name)
+        }
+        rNA.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
+        setRecipeNamesArr(rNA)
+        //making recipesWithTag
+        if(selectedTag === "Any tag"){
+            setRecipesWithTag(rNA)
+        }else{
+            let rWT = []
+            for(let each of rNA){
+                let foundRecipe = recipes.find(recipe => recipe.name === each)
+                if(foundRecipe.tags.indexOf(selectedTag) !== -1){
+                    rWT.push(each)
+                }
+            }
+            setRecipesWithTag(rWT)
+        }
+    }, [recipes, selectedTag])
+    
+
+
+
     const handleTagSelection = (e) =>{
         const newTag = e.target.value
         setSelectedTag(newTag)
         setSelectedRecipe("I said CHOOSE!")
         setSelectedRecipeObj({})
-        if(newTag === 'Any tag'){
-            setRecipesWithTag(recipeNamesArr)
-        }else{
-            let newNamesList = []
-            for(let each of recipeNamesArr){
-                let foundRecipe = recipes.find(recipe => recipe.name === each)
-                if(foundRecipe.tags.indexOf(newTag) !== -1){
-                    newNamesList.push(each)
-                }
-            }
-            setRecipesWithTag(newNamesList)
-        }
-        
     }
+
     const handleRecipeSelection = (e) =>{
         const newRecipe = e.target.value
         if(newRecipe === 'I said CHOOSE!'){
@@ -62,16 +70,34 @@ const Rematch = () =>{
             let foundRecipe = recipes.find(recipe => recipe.name === newRecipe)
             setSelectedRecipeObj(foundRecipe)
         }
-        
     }
-    const handleClickCookButton = async (e) =>{
+
+    const handleClickCookButton = async () => {
+        const updatedRecipeObj = {
+            ...selectedRecipeObj,
+            cooked: selectedRecipeObj.cooked + 1
+        };
+        setSelectedRecipeObj(updatedRecipeObj);
         try {
-            const updatedRecipe = await axios.put(`http://localhost:3000/api/recipes/update-recipe-by-id/${selectedRecipeObj._id}`, {cooked: selectedRecipeObj.cooked + 1 })
-            dispatch(setRecipes(updatedRecipe.data.payload2))
+            const updatedRecipe = await axios.put(`http://localhost:3000/api/recipes/update-recipe-by-id/${selectedRecipeObj._id}`, { cooked: updatedRecipeObj.cooked });
+            dispatch(setRecipes(updatedRecipe.data.payload2));
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-        
+    }
+
+    const handleClickLikeButton = async () => {
+        const updatedRecipeObj = {
+            ...selectedRecipeObj,
+            liked: selectedRecipeObj.liked + 1
+        };
+        setSelectedRecipeObj(updatedRecipeObj);
+        try {
+            const updatedRecipe = await axios.put(`http://localhost:3000/api/recipes/update-recipe-by-id/${selectedRecipeObj._id}`, { liked: updatedRecipeObj.liked });
+            dispatch(setRecipes(updatedRecipe.data.payload2));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return(
@@ -144,8 +170,8 @@ const Rematch = () =>{
                             }
                         </ol>
                         <p>Notes: {selectedRecipeObj.notes}</p>
-                        <button type="button" onClick={handleClickCookButton}>Cook</button>
-                        <button type="button">Received Like</button>
+                        <button type="button" id="cook" onClick={handleClickCookButton}>Cook</button>
+                        <button type="button" id="like" onClick={handleClickLikeButton}>Received Like</button>
                     </div>
                 )}           
             </div>
