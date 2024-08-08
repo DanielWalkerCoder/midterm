@@ -24,7 +24,7 @@ const Rematch = () =>{
     //making recipeNamesArr
     let recipeNamesArr = []
     for(let i=0; i<recipes.length; i++){
-        recipeNamesArr = recipeNamesArr.concat(recipes[i].name)
+        recipeNamesArr.push(recipes[i].name)
     }
     recipeNamesArr.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
     //
@@ -36,6 +36,8 @@ const Rematch = () =>{
     const handleTagSelection = (e) =>{
         const newTag = e.target.value
         setSelectedTag(newTag)
+        setSelectedRecipe("I said CHOOSE!")
+        setSelectedRecipeObj({})
         if(newTag === 'Any tag'){
             setRecipesWithTag(recipeNamesArr)
         }else{
@@ -53,12 +55,14 @@ const Rematch = () =>{
     const handleRecipeSelection = (e) =>{
         const newRecipe = e.target.value
         if(newRecipe === 'I said CHOOSE!'){
-
+            setSelectedRecipe(newRecipe)
+            setSelectedRecipeObj({})
+        }else{
+            setSelectedRecipe(newRecipe)
+            let foundRecipe = recipes.find(recipe => recipe.name === newRecipe)
+            setSelectedRecipeObj(foundRecipe)
         }
-        setSelectedRecipe(newRecipe)
-        let foundRecipe = recipes.find(recipe => recipe.name === newRecipe)
-        setSelectedRecipeObj(foundRecipe)
-        console.log(newRecipe)
+        
     }
     const handleClickCookButton = async (e) =>{
         try {

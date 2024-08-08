@@ -16,9 +16,14 @@ function AllyList() {
     }
     getAllies()
   }, [])
+  let sortedAllyList = []
+  for(let each of allyList){
+    sortedAllyList.push(each.name)
+    }
+  sortedAllyList.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
   
   const handleOnSubmit = async (e)=>{
-    // e.preventDefault()
+    e.preventDefault()
     try{
       const newAllyList = await axios.post('http://localhost:3000/api/allies/create-ally', {name: allyInput})
       setAllyList(newAllyList.data.payload2)
@@ -28,7 +33,8 @@ function AllyList() {
     }
   }
 
-  const deleteAlly = async (id)=>{
+  const deleteAlly = async (e, id)=>{
+    e.preventDefault()
     try {
         const updatedAllies = await axios.delete(`http://localhost:3000/api/allies/delete-ally-by-id/${id}`)
         setAllyList(updatedAllies.data.payload2)
@@ -54,10 +60,10 @@ function AllyList() {
       <div className="allyList-div">
         <ul>
         {
-          allyList.map(ally =>{
+          sortedAllyList.map((ally, index) =>{
                   return(
-                    <li key={ally._id}>
-                      {ally.name} <a href="#" onClick={()=>deleteAlly(ally._id)}>delete</a>
+                    <li key={index}>
+                      {ally} <a href="#" onClick={(e)=>deleteAlly(e, (allyList.find(thing => thing.name === ally))._id)}>delete</a>
                     </li>
                   )
                 })

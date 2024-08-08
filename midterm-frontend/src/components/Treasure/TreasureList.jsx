@@ -9,7 +9,7 @@ const TreasureList = () => {
     const treasures = useSelector((state) => state.treasures.value);
     const [treasuresInput, setTreasuresInput] = useState('');
     const handleOnSubmit = async (e)=>{
-        // e.preventDefault()
+        e.preventDefault()
         try{
           const newTreasureList = await axios.post('http://localhost:3000/api/treasures/create-treasure', {name: treasuresInput})
           dispatch(setTreasures(newTreasureList.data.payload2))
@@ -18,7 +18,8 @@ const TreasureList = () => {
           console.log(error)
         }
       }
-    const deleteTreasure = async (id)=>{
+    const deleteTreasure = async (e, id)=>{
+        e.preventDefault()
         try {
             const updatedTreasures = await axios.delete(`http://localhost:3000/api/treasures/delete-treasure-by-id/${id}`)
             dispatch(setTreasures(updatedTreasures.data.payload2))
@@ -26,7 +27,8 @@ const TreasureList = () => {
             console.log(error)
         }
       }
-    const deleteAndMoveTreasure = async (id)=>{
+    const deleteAndMoveTreasure = async (e, id)=>{
+        e.preventDefault()
         try {
             const findTreasure = await axios.get(`http://localhost:3000/api/treasures/get-treasure-by-id/${id}`)
             const foundTreasure = findTreasure.data.payload
@@ -58,7 +60,7 @@ const TreasureList = () => {
                         treasures.map(treasure =>{
                             return(
                                 <li key={treasure._id}>
-                                    {treasure.name} <a href="#" onClick={()=>deleteTreasure(treasure._id)}>delete</a> <a href="#" onClick={()=>deleteAndMoveTreasure(treasure._id)}>acquire</a>
+                                    {treasure.name} <a href="#" onClick={(e)=>deleteTreasure(e, treasure._id)}>delete</a> <a href="#" onClick={(e)=>deleteAndMoveTreasure(e, treasure._id)}>acquire</a>
                                 </li>
                             )
                         })

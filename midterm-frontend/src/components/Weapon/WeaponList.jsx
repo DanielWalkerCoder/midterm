@@ -14,7 +14,7 @@ const WeaponList = () => {
     sortedWeapons.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
     const [weaponsInput, setWeaponsInput] = useState('');
     const handleOnSubmit = async (e)=>{
-        // e.preventDefault()
+        e.preventDefault()
         try{
           const newWeaponList = await axios.post('http://localhost:3000/api/weapons/create-weapon', {name: weaponsInput})
           dispatch(setWeapons(newWeaponList.data.payload2))
@@ -23,7 +23,8 @@ const WeaponList = () => {
           console.log(error)
         }
       }
-    const deleteWeapon = async (id)=>{
+    const deleteWeapon = async (e, id)=>{
+        e.preventDefault()
         try {
             const updatedWeapons = await axios.delete(`http://localhost:3000/api/weapons/delete-weapon-by-id/${id}`)
             dispatch(setWeapons(updatedWeapons.data.payload2))
@@ -31,7 +32,8 @@ const WeaponList = () => {
             console.log(error)
         }
       }
-    const deleteAndMoveWeapon = async (id)=>{
+    const deleteAndMoveWeapon = async (e, id)=>{
+        e.preventDefault()
         try {
             const findWeapon = await axios.get(`http://localhost:3000/api/weapons/get-weapon-by-id/${id}`)
             const foundWeapon = findWeapon.data.payload
@@ -62,7 +64,7 @@ const WeaponList = () => {
                         sortedWeapons.map((weapon, index) =>{
                             return(
                                 <li key={index}>
-                                    {weapon} <a href="#" onClick={()=>deleteWeapon((weapons.find(thing => thing.name === weapon))._id)}>delete</a> <a href="#" onClick={()=>deleteAndMoveWeapon((weapons.find(thing => thing.name === weapon))._id)}>seek again</a>
+                                    {weapon} <a href="#" onClick={(e)=>deleteWeapon(e, (weapons.find(thing => thing.name === weapon))._id)}>delete</a> <a href="#" onClick={(e)=>deleteAndMoveWeapon(e, (weapons.find(thing => thing.name === weapon))._id)}>seek again</a>
                                 </li>
                             )
                         })

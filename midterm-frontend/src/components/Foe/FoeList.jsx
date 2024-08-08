@@ -16,8 +16,14 @@ function FoeList() {
     }
     getFoes()
   }, [])
+  let sortedFoeList = []
+  for(let each of foeList){
+    sortedFoeList.push(each.name)
+    }
+  sortedFoeList.sort((a,b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1)
   
   const handleOnSubmit = async (e)=>{
+    e.preventDefault()
     try{
       const newFoeList = await axios.post('http://localhost:3000/api/foes/create-foe', {name: foeInput})
       setFoeList(newFoeList.data.payload2)
@@ -27,7 +33,8 @@ function FoeList() {
     }
   }
 
-  const deleteFoe = async (id)=>{
+  const deleteFoe = async (e, id)=>{
+    e.preventDefault()
     try {
         const updatedFoes = await axios.delete(`http://localhost:3000/api/foes/delete-foe-by-id/${id}`)
         setFoeList(updatedFoes.data.payload2)
@@ -52,10 +59,10 @@ function FoeList() {
       <div className="foeList-div">
         <ul>
         {
-          foeList.map(foe =>{
+          sortedFoeList.map((foe, index) =>{
                   return(
-                    <li key={foe._id}>
-                      {foe.name} <a href="#" onClick={()=>deleteFoe(foe._id)}>delete</a>
+                    <li key={index}>
+                      {foe} <a href="#" onClick={(e)=>deleteFoe(e, (foeList.find(thing => thing.name === foe))._id)}>delete</a>
                     </li>
                   )
                 })
