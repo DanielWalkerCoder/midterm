@@ -49,9 +49,6 @@ const Rematch = () =>{
             setRecipesWithTag(rWT)
         }
     }, [recipes, selectedTag])
-    
-
-
 
     const handleTagSelection = (e) =>{
         const newTag = e.target.value
@@ -170,8 +167,7 @@ const Rematch = () =>{
                             }
                         </ol>
                         <p>Notes: {selectedRecipeObj.notes}</p>
-                        <button type="button" id="cook" onClick={handleClickCookButton}>Cook</button>
-                        <button type="button" id="like" onClick={handleClickLikeButton}>Received Like</button>
+                        <button type="button" id="cook" onClick={handleClickCookButton}>Cook</button> <button type="button" id="like" onClick={handleClickLikeButton}>Received Like</button>
                     </div>
                 )}           
             </div>

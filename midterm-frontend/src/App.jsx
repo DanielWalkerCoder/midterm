@@ -5,6 +5,7 @@ import WeaponList from './components/Weapon/WeaponList';
 import TreasureList from './components/Treasure/TreasureList';
 import NewRecipe from './components/Recipe/NewRecipe/NewRecipe'
 import Rematch from './components/Recipe/Rematch/Rematch'
+import EditRecipe from './components/Recipe/EditRecipe/EditRecipe'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import './App.css'
@@ -65,7 +66,7 @@ function App() {
             </h2>
             <div id="panelsStayOpen-collapseFive" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
               <div className="accordion-body">
-                In progress
+                <EditRecipe />
               </div>
             </div>
           </div>
