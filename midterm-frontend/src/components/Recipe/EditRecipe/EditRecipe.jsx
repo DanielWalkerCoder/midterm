@@ -148,6 +148,20 @@ const EditRecipe = () =>{
         }
       }
 
+      const handleOnUndo = ()=>{
+        setNameInput(selectedRecipeObj.name)
+        setTagsInput('')
+        setTagsList(selectedRecipeObj.tags)
+        setCookedInput(selectedRecipeObj.cooked)
+        setLikedInput(selectedRecipeObj.liked)
+        setSourceInput(selectedRecipeObj.source)
+        setIngredientsInput('')
+        setIngredientsList(selectedRecipeObj.ingredients)
+        setDirectionsInput('')
+        setDirectionsList(selectedRecipeObj.directions)
+        setNotesInput(selectedRecipeObj.notes)
+      }
+
     return(
         <>
             <h3>Edit a Recipe.</h3>
@@ -286,7 +300,7 @@ const EditRecipe = () =>{
                             />
                         </div>
                         <br></br>
-                        <button type="submit">Update Recipe</button> <button type="button">Undo Changes</button> <button type="button" onClick={handleOnDelete}>Delete Recipe</button>
+                        <button type="submit">Update Recipe</button> <button type="button" onClick={handleOnUndo}>Undo Changes</button> <button type="button" onClick={handleOnDelete}>Delete Recipe</button>
                     </form>
                 )}           
             </div>
