@@ -70,7 +70,7 @@ const NewRecipe = () => {
                 notes: ''
             })
             dispatch(setRecipes(newRecipesList.data.payload2))
-            setRandomRecipeText(`New Recipe Added: ${newRandomRecipeObj.strMeal}`)
+            setRandomRecipeText(`"${newRandomRecipeObj.strMeal}" recipe added. Try it!`)
         } catch (error) {
             console.log(error)
         }
@@ -198,7 +198,7 @@ const NewRecipe = () => {
             </div>
             <br></br>
             <div className='newRandom'>
-                <button type="button" onClick={addRandomRecipe}>Fetch New Random Recipe</button>
+                <button type="button" onClick={addRandomRecipe}>Fetch New Recipe</button>
                 <p>{randomRecipeText}</p>
             </div>
         </>

@@ -17,7 +17,6 @@ function App() {
         <div id="top-left">
         </div>
         <div id="top-right">
-          <TreasureList />
         </div>
       </div>
       <div className="container" id="bottom">
@@ -37,58 +36,70 @@ function App() {
           <div className="accordion-item">
             <h2 className="accordion-header" id="panelsStayOpen-headingThree">
               <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                Arsenal
+                Hunt for Treasure
               </button>
             </h2>
             <div id="panelsStayOpen-collapseThree" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
               <div className="accordion-body">
-                <WeaponList />
+                <TreasureList />
               </div>
             </div>
           </div>
           <div className="accordion-item">
             <h2 className="accordion-header" id="panelsStayOpen-headingFour">
               <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                New Recipe
+                Arsenal
               </button>
             </h2>
             <div id="panelsStayOpen-collapseFour" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
               <div className="accordion-body">
-                <NewRecipe />
+                <WeaponList />
               </div>
             </div>
           </div>
           <div className="accordion-item">
             <h2 className="accordion-header" id="panelsStayOpen-headingFive">
               <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-                Update Cookbook
+                New Recipe
               </button>
             </h2>
             <div id="panelsStayOpen-collapseFive" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
               <div className="accordion-body">
-                <EditRecipe />
+                <NewRecipe />
               </div>
             </div>
           </div>
           <div className="accordion-item">
             <h2 className="accordion-header" id="panelsStayOpen-headingSix">
               <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
-                Trusted Allies
+                Update Cookbook
               </button>
             </h2>
             <div id="panelsStayOpen-collapseSix" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
               <div className="accordion-body">
-                <AllyList />
+                <EditRecipe />
               </div>
             </div>
           </div>
           <div className="accordion-item">
             <h2 className="accordion-header" id="panelsStayOpen-headingSeven">
               <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
-                Hated Foes
+                Trusted Allies
               </button>
             </h2>
             <div id="panelsStayOpen-collapseSeven" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
+              <div className="accordion-body">
+                <AllyList />
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="panelsStayOpen-headingEight">
+              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
+                Hated Foes
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseEight" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
               <div className="accordion-body">
                 <FoeList />
               </div>

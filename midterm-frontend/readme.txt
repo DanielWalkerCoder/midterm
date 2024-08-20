@@ -1,3 +1,5 @@
+***FRONTEND NOTES***
+
 To start a frontend project, type npm create vite@latest in the terminal to create a project folder. Name it and then select React for framework and JavaScript for variant and then run cd 'name' and npm install. After opening in VCS with code ., run npm run dev in VSC to use your frontend in a browser. (dev is in your package.json)
 
 Make sure to install axios if you're connecting to a backend (and install cors in the backend).
@@ -14,3 +16,8 @@ Get rid of the code in app.jsx and use the snippet rfce through the ES7+ extensi
   user-select: none;
 }
 //root is a class established in main.jsx
+
+To use bootstrap stylings, first install it with npm install bootstrap@latest --save. Then import both the css and js for it with this:
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
