@@ -148,7 +148,7 @@ const EditRecipe = () =>{
         }
       }
 
-      const handleOnUndo = ()=>{
+    const handleOnUndo = ()=>{
         setNameInput(selectedRecipeObj.name)
         setTagsInput('')
         setTagsList(selectedRecipeObj.tags)

@@ -14,6 +14,7 @@ const NewRecipe = () => {
     const [directionsInput, setDirectionsInput] = useState('');
     const [directionsList, setDirectionsList] = useState([]);
     const [notesInput, setNotesInput] = useState('');
+    const [randomRecipeText, setRandomRecipeText] = useState('');
 
     const clearForm = ()=>{
         setNameInput("")
@@ -46,6 +47,34 @@ const NewRecipe = () => {
           console.log(error)
         }
       }
+    
+    const addRandomRecipe = async (e)=>{
+        e.preventDefault();
+        try {
+            let response = await axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
+            let newRandomRecipeObj = response.data.meals[0]
+            let newRandomRecipeIngredients = []
+            for(let i=1; i<21; i++){
+                if(newRandomRecipeObj[`strIngredient${i}`] !== ''){
+                    newRandomRecipeIngredients.push(newRandomRecipeObj[`strMeasure${i}`] + ' ' + newRandomRecipeObj[`strIngredient${i}`])
+                }
+            }
+            const newRecipesList = await axios.post('http://localhost:3000/api/recipes/create-recipe', {
+                name: newRandomRecipeObj.strMeal,
+                tags: [newRandomRecipeObj.strArea, newRandomRecipeObj.strCategory.toLowerCase(), ...newRandomRecipeObj.strTags.toLowerCase().split(',')],
+                cooked: 0,
+                liked: 0,
+                source: newRandomRecipeObj.strSource,
+                ingredients: newRandomRecipeIngredients,
+                directions: [newRandomRecipeObj.strInstructions],
+                notes: ''
+            })
+            dispatch(setRecipes(newRecipesList.data.payload2))
+            setRandomRecipeText(`New Recipe Added: ${newRandomRecipeObj.strMeal}`)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const addTag = ()=>{
         setTagsList(tagsList.concat(tagsInput))
@@ -166,6 +195,11 @@ const NewRecipe = () => {
                     <br></br>
                     <button type="submit">Add New Recipe</button> <button type="button" onClick={clearForm}>Cancel</button>
                 </form>
+            </div>
+            <br></br>
+            <div className='newRandom'>
+                <button type="button" onClick={addRandomRecipe}>Fetch New Random Recipe</button>
+                <p>{randomRecipeText}</p>
             </div>
         </>
     )   
