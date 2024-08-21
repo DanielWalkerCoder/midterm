@@ -55,13 +55,17 @@ const NewRecipe = () => {
             let newRandomRecipeObj = response.data.meals[0]
             let newRandomRecipeIngredients = []
             for(let i=1; i<21; i++){
-                if(newRandomRecipeObj[`strIngredient${i}`] !== ''){
+                if(newRandomRecipeObj[`strIngredient${i}`] !== '' && newRandomRecipeObj[`strIngredient${i}`] !== null){
                     newRandomRecipeIngredients.push(newRandomRecipeObj[`strMeasure${i}`] + ' ' + newRandomRecipeObj[`strIngredient${i}`])
                 }
             }
+            let tagsArray = [...newRandomRecipeObj.strTags.toLowerCase().split(',')]
+            while(tagsArray[tagsArray.length-1] === ''){
+                tagsArray.pop()
+            }
             const newRecipesList = await axios.post('http://localhost:3000/api/recipes/create-recipe', {
                 name: newRandomRecipeObj.strMeal,
-                tags: [newRandomRecipeObj.strArea, newRandomRecipeObj.strCategory.toLowerCase(), ...newRandomRecipeObj.strTags.toLowerCase().split(',')],
+                tags: [newRandomRecipeObj.strArea, newRandomRecipeObj.strCategory.toLowerCase(), ...tagsArray],
                 cooked: 0,
                 liked: 0,
                 source: newRandomRecipeObj.strSource,

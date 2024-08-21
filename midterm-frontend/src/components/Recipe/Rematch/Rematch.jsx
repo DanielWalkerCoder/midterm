@@ -145,7 +145,7 @@ const Rematch = () =>{
                         </ul>
                         <p>Times Cooked: {selectedRecipeObj.cooked}</p>
                         <p>Likes: {selectedRecipeObj.liked}</p>
-                        <p>Source: {selectedRecipeObj.source}</p>
+                        <p>Source: <a href={selectedRecipeObj.source} target="_blank">{selectedRecipeObj.source}</a></p>
                         <p>Ingredients:</p>
                         <ul>
                             {
