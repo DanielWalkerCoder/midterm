@@ -7,7 +7,7 @@ import NewRecipe from './components/Recipe/NewRecipe/NewRecipe'
 import Rematch from './components/Recipe/Rematch/Rematch'
 import EditRecipe from './components/Recipe/EditRecipe/EditRecipe'
 import Resume from './components/Resume/Resume'
-import Nav from './components/Nav/Nav'
+// import Nav from './components/Nav/Nav'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import './App.css'
@@ -15,15 +15,13 @@ import './App.css'
 function App() {
   return (
     <>
-      <div>
+      {/* <div>
         <br />
         <br />
         <br />
         <br />
         <Nav />
-      </div>
-      
-
+      </div> */}
       <div className="container" id="bottom">
         <div className="accordion" id="accordionPanelsStayOpenExample">
           <div className="accordion-item">
