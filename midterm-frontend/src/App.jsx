@@ -15,11 +15,15 @@ import './App.css'
 function App() {
   return (
     <>
-      <Nav />
-      <br />
-      <br />
-      <br />
-      <br />
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <Nav />
+      </div>
+      
+
       <div className="container" id="bottom">
         <div className="accordion" id="accordionPanelsStayOpenExample">
           <div className="accordion-item">
