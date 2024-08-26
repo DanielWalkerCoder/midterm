@@ -17,11 +17,11 @@ function Resume() {
     }, [recipes])
 
     return(
-        <div>
-            <div>
-                <img src={raichu} alt="Raichu" style={{width: '15%', height: '15%'}}></img>
+        <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+            <div style={{ marginRight: '0px !important' , padding: '0px', flexShrink: 0}}>
+                <img src={raichu} alt="Raichu" style={{width: '45%', height: 'auto'}}></img>
             </div>
-            <div>
+            <div style={{margin: '0px', padding: '0px', flexGrow: 0}}>
                 <p>Dannondorf</p>
                 <p>Level {(experience - (experience % 10)) / 10} Chef</p>
                 <p>{10 - (experience % 10)} experience to Level {(experience - (experience % 10)) / 10 + 1}</p>
