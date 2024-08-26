@@ -1,0 +1,33 @@
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import './Resume.css'
+import raichu from '../../assets/raichu.jpg'
+
+function Resume() {
+    const recipes = useSelector((state) => state.recipes.value);
+    const [experience, setExperience] = useState(0);
+
+    useEffect(() => {
+        let newExp = 0
+        for(let each of recipes){
+            newExp += each.cooked
+            newExp += 2 * each.liked
+        }
+        setExperience(newExp)
+    }, [recipes])
+
+    return(
+        <div>
+            <div>
+                <img src={raichu} alt="Raichu" style={{width: '15%', height: '15%'}}></img>
+            </div>
+            <div>
+                <p>Dannondorf</p>
+                <p>Level {(experience - (experience % 10)) / 10} Chef</p>
+                <p>{10 - (experience % 10)} experience to Level {(experience - (experience % 10)) / 10 + 1}</p>
+            </div>
+        </div>
+    )
+}
+
+export default Resume

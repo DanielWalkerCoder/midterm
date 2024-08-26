@@ -6,6 +6,7 @@ import TreasureList from './components/Treasure/TreasureList';
 import NewRecipe from './components/Recipe/NewRecipe/NewRecipe'
 import Rematch from './components/Recipe/Rematch/Rematch'
 import EditRecipe from './components/Recipe/EditRecipe/EditRecipe'
+import Resume from './components/Resume/Resume'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import './App.css'
@@ -21,6 +22,18 @@ function App() {
       </div>
       <div className="container" id="bottom">
         <div className="accordion" id="accordionPanelsStayOpenExample">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="panelsStayOpen-headingOne">
+              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Stats
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+              <div className="accordion-body">
+                <Resume />
+              </div>
+            </div>
+          </div>
           <div className="accordion-item">
             <h2 className="accordion-header" id="panelsStayOpen-headingTwo">
               <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
